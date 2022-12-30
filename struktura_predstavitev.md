@@ -1,1 +1,1 @@
-
+#Struktura predstavitve: bitap algoritm
