@@ -17,8 +17,24 @@ Recimo, da imamo podan nek tekst. V tem tekstu bi radi našli podniz, ki je enak
 Rešitev za naš začetni problem lahko zelo izboljšamo. Tukaj bomo izrabili dejstvo bitnega paralelisma s katerim bomo lahko zgornji problem točnega iskanja niza zelo pohitrili.
 Algoritmi kateri uporabljajo bitni paralelism se uporabljajo na naslednjih področjih: iskanje plagiarisma, rudarjenje podatkov, bioinformatiki (iskanje genov itd.),...
 
+### Na hitro o bit shifting:
+Imamo nek bitni zapis (lahko predstavlja nek znak, številko ipd.). Če naredimo shift operacijo na nekem bitnem zapisu. Zgled:
+
+111111 << 3 dobimo: 111000.
+111111 << 1 dobimo: 111110
+
+Torej v shift v levo operaciji dodamo 0 na desno stran in vse zamaknemo v levo (čisto levi element se izbriše).
+
+Kje se to uporablja? Včasih se je recimo uporabljalo za množenje z $2$: 
+Recimo, da imamo številko 00001001 = 9.
+Na njej naredimo << 3, dobimo: 01001000 = 72 = 9 * 2^3
+
+Če bi shiftali v drugo smer, bi pa delili z 2.
+
+Sedaj se bitshifting uporablja tudi recimo za šifriranje podatkov itd. Mi pa ga bomo uporabili tudi v našem bitap algoritmu (v algoritmu za iskanje nizov).
+
 ### Bitni paralelism:
-Znake v vzorcu in v tekstu prevedemo v bitni zapis in nato operiramo nad tem bitnim zapisom. Zakaj je to hitrejše in kakšne so operacije. Besedo paralelizem si lahko predstavljamo kot neko vzporedno dogajanje. Torej kot že vemo, so dananšnji procesorji zmožni izvajanja več operacij vzporedno (paralelno). Enostaven primer bi bil seštevanje dveh 8 bitnih števil. Če imamo 16 bitni procesor nam lahko ta števila sešteje v enem ciklu (enostavno:manj je ciklov, hitreje lahko izvedemo operacijo). Če imamo večjederni procesor lahko naredimo naenkrat toliko takih računov, koliko imamo jeder. Namesto računanja si sedaj lahko predstavljamo primerjanje znakov med vzorcem in podnizi iz teksta. 
+(Znake v vzorcu in v tekstu prevedemo v bitni zapis in nato operiramo nad tem bitnim zapisom. Zakaj je to hitrejše in kakšne so operacije. Besedo paralelizem si lahko predstavljamo kot neko vzporedno dogajanje. Torej kot že vemo, so dananšnji procesorji zmožni izvajanja več operacij vzporedno (paralelno). Enostaven primer bi bil seštevanje dveh 8 bitnih števil. Če imamo 16 bitni procesor nam lahko ta števila sešteje v enem ciklu (enostavno:manj je ciklov, hitreje lahko izvedemo operacijo). Če imamo večjederni procesor lahko naredimo naenkrat toliko takih računov, koliko imamo jeder. Namesto računanja si sedaj lahko predstavljamo primerjanje znakov med vzorcem in podnizi iz teksta.) 
 Kako naredimo bitmask: Naredimo bitno reprezentacijo vzorca. Torej recimo, da imamo "ababaaa" Bomo naredili bitno masko za črko "b" in za črko "a". Prvo moramo vzorec gledati iz desne proti levi. Torej bomo imeli 1010111 in 0101000. 
 
 Nato bomo imeli neko začetno stanje kjer bodo same enke. Šli bomo skozi tekst in shiftali v levo naše stanje, ki se bo za vsak znak spreminjalo. Če se bosta črki ujemali(tudi glede na zaporedje), se bo nicla shiftala v levo. Če se črki ujemata bomo videli preko OR operacije na obeh bitnih zapisih. (torej na zapisu stanja in zapisu bitmaska). Stanja si bomo vmes zapomnili. Če pride 0 čisto do leve, pomeni, da smo našli točno ujemanje. Za približno ujemanje pa moramo pogledati vmesna stanja, ki smo si jih zapomnili. Pred tem pa si poglejmo kdaj sta si dva niza priblizno enaka.
@@ -59,4 +75,6 @@ iii)$d(x,z) \leq d(x,y) + d(y,z)$
 
 Lahko rečemo, da prostor nizov tvori metrični prostor. Torej imamo obe razdalji, tako Hammingovo kot Levenshteinovo definirano kot metriko.
 
-Ceni, da preidemo iz enega niza v drugega lahko rečemo tudi št. napak, ki jih bomo označili s $k$. Koliko je nek niz napačen lahko nato pogledamo z razmerjem $\alpha = \frac{k}{m}$
+Ceni, da preidemo iz enega niza v drugega lahko rečemo tudi št. napak, ki jih bomo označili s $k$. Koliko je nek niz napačen lahko nato pogledamo z razmerjem $\alpha = \frac{k}{m}$. 
+
+V praksi nas ponavadi zanimajo napake med $1/m$ in $1/2$. Torej ponavadi napaka, ki je večja od $1/2$ ni več sprejemljiva.
