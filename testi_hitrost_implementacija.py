@@ -15,4 +15,4 @@ def bitap_fuzzy_bitwise_search(text, pattern, k):
         if R[k] & (1 << m) == 0:
             return text[i-m+1:]
     return None
-print(bitap_fuzzy_bitwise_search("JanezSe UciZaIzpit", "e zmlt", 4))
+print(bitap_fuzzy_bitwise_search("JanezssSe UciZaIzpit uci IklitSeUqqza Izsdafa Uci saIzpit Udci", "IzpitSeUci", 4))
