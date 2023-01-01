@@ -26,7 +26,21 @@ Kakšna je časovna zahtevnost v najboljšem primeru?
         txt = "AABCCAADDEE"
         pat = "FAA"
 Najboljši primer je, če prvega znaka vzorca ni v tekstu.
+Recimo, da imamo podan nek tekst. V tem tekstu bi radi izvedeli, kolikokrat se pojavi nek vzorec. Kako bi to naredili? Vemo, da je tekst dolžine $n$ in vzorec dolžine $m$. Vemo tudi, da je $n \ge m$. Če je vzorec prazen, ali če je $m \ge n$ vrnemo 0. Pogledajmo si naiven pristop: Naredimo zanko po tekstu. Za vsak znak v tekstu z drugo zanko pogledamo v vzorec, če se na naslednjem mestu znaka ujemata. 
 
+Kakšna je časovna zahtevnost tega algoritma v najslabšem primeru? $(n * (n + 1)) / 2$
+primer: 
+        txt = "AAAAAAAAAAAAAAAAAA"
+        pat = "AAAAA"
+
+ali
+        txt = "AAAAAAAAAAAAAAAAAB"
+        pat = "AAAAB"
+
+Kakšna je časovna zahtevnost v najboljšem primeru? 
+        txt = "AABCCAADDEE"
+        pat = "FAA"
+Najboljši primer je, če prvega znaka vzorca ni v tekstu.
 ## String matching bitap:
 Rešitev za naš začetni problem lahko zelo izboljšamo. Tukaj bomo izrabili dejstvo bitnega paralelisma s katerim bomo lahko zgornji problem točnega iskanja niza zelo pohitrili.
 Algoritmi kateri uporabljajo bitni paralelism se uporabljajo na naslednjih področjih: iskanje plagiarisma, rudarjenje podatkov, bioinformatiki (iskanje genov itd.),...
